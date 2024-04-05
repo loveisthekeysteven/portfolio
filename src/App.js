@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useRef, useState, useMemo} from 'react';
+import { About, Footer, Header, Skills, Work } from "./container"
+import { Navbar, SocialMedia, NavigationDots } from "./components"
+import './App.scss'
 
 function App() {
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const ref5 = useRef(null);
+
+  const home = useIsInViewport(ref1);
+  const about = useIsInViewport(ref2);
+  const work = useIsInViewport(ref3);
+  const skills = useIsInViewport(ref4);
+  const contact = useIsInViewport(ref5);
+
+  const navs = [home, about, work, skills, contact]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Navbar />
+      <Header ref={ref1} />
+      <About ref={ref2} />
+      <Work ref={ref3} />
+      <Skills ref={ref4} />
+      <Footer ref={ref5} />
+      <NavigationDots active={navs} />
+      <SocialMedia />
     </div>
-  );
+  )
 }
 
-export default App;
+function useIsInViewport(ref) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(([entry]) =>
+        setIsIntersecting(entry.isIntersecting),
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    ref.current && observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref, observer]);
+
+  return isIntersecting;
+}
+
+export default App
