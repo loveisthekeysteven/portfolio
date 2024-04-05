@@ -1,18 +1,18 @@
-import React, { useState, forwardRef, useRef } from 'react';
-import { images } from '../../constants';
-import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
-import Swal from 'sweetalert2';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import React, { useState, forwardRef, useRef } from "react";
+import { images } from "../../constants";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
-import './Footer.scss';
+import "./Footer.scss";
 
 const Footer = forwardRef(function Footer(props, ref) {
   const [formData, setformData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -29,19 +29,19 @@ const Footer = forwardRef(function Footer(props, ref) {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    if (name === '' || email === '' || message === '') {
+    if (name === "" || email === "" || message === "") {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'You need to fill in all the fields!',
+        icon: "error",
+        title: "Oops...",
+        text: "You need to fill in all the fields!",
       });
     } else {
       emailjs
         .sendForm(
-          'service_r001ifk',
-          'template_qcklvgp',
+          "service_r001ifk",
+          "template_qcklvgp",
           form.current,
-          'qeovJUbH_FVoLIU69'
+          "qeovJUbH_FVoLIU69"
         )
         .then(
           (result) => {
@@ -53,20 +53,20 @@ const Footer = forwardRef(function Footer(props, ref) {
         );
 
       setIsFormSubmitted(true);
-      Swal.fire('Good job!', 'Thank you for getting in touch!', 'success');
+      Swal.fire("Good job!", "Thank you for getting in touch!", "success");
     }
   };
 
-  const phoneNumber = '+2349031719680';
-  const returnURL = 'http://localhost:3000/';
+  const phoneNumber = "+2349031719680";
+  const returnURL = "http://localhost:3000/";
 
   const handleClick = (e) => {
     e.preventDefault();
     const message = encodeURIComponent(
-      'Hello! I contacted you from your website.'
+      "Hello! I contacted you from your website."
     );
     const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
-    window.open(whatsappURL, '_blank');
+    window.open(whatsappURL, "_blank");
     window.location.href = returnURL;
   };
 
@@ -141,7 +141,7 @@ const Footer = forwardRef(function Footer(props, ref) {
           </form>
         ) : (
           <div>
-            <h3 className="head-text">Thank you for getting in touch!</h3>
+            <h3 className="head-text">Thank you for getting in touch!!</h3>
           </div>
         )}
       </motion.div>
