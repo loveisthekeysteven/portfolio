@@ -1,17 +1,17 @@
-import { useState, useEffect, forwardRef } from 'react';
-import { AiFillEye, AiFillGithub } from 'react-icons/ai';
-import { FiExternalLink } from 'react-icons/fi';
-import { motion } from 'framer-motion';
-import { data } from '../../Data';
-import './Work.scss';
+import { useState, useEffect, forwardRef } from "react";
+import { AiFillEye, AiFillGithub } from "react-icons/ai";
+import { FiExternalLink } from "react-icons/fi";
+import { motion } from "framer-motion";
+import { data } from "../../Data";
+import "./Work.scss";
 
 const Work = forwardRef(function Work(props, ref) {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState("All");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
 
-  const tabs = ['React JS', 'All'];
+  const tabs = ["React JS", "All", "Web App"];
 
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
@@ -19,7 +19,7 @@ const Work = forwardRef(function Work(props, ref) {
 
     setTimeout(() => {
       setAnimateCard({ y: 0, opacity: 1 });
-      if (item === 'All') {
+      if (item === "All") {
         setFilterWork(works);
       } else {
         setFilterWork(works.filter((work) => work.tags.includes(item)));
@@ -48,7 +48,7 @@ const Work = forwardRef(function Work(props, ref) {
               key={index}
               onClick={() => handleWorkFilter(item)}
               className={`app__work-filter-item app__flex p-text ${
-                activeFilter === item ? 'item-active' : ''
+                activeFilter === item ? "item-active" : ""
               }`}
             >
               {item}
@@ -69,7 +69,7 @@ const Work = forwardRef(function Work(props, ref) {
                   whileHover={{ opacity: [0, 1] }}
                   transition={{
                     duration: 0.25,
-                    ease: 'easeInOut',
+                    ease: "easeInOut",
                     staggerChildren: 0.5,
                   }}
                   className="app__work-hover app__flex"
